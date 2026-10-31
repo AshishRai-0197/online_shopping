@@ -2,7 +2,7 @@ import knex from "knex";
 import knexConfig from "@/knexfile";
 import bcrypt from "bcryptjs";
 import jwt from "jsonwebtoken";
-import { sendMail } from "../email/route";
+import { sendMail } from "@/email/route";
 
 const kn = knex(knexConfig.development);
 
@@ -36,7 +36,7 @@ export async function POST(req: Request) {
       expiresIn: "1h",
     });
 
-    sendMail(email, "signup").catch((error) => {
+    sendMail(email).catch((error) => {
       console.error("Failed to send welcome email:", error);
     });
 

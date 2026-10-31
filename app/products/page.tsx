@@ -1,7 +1,7 @@
 "use client";
 
 import { useState } from "react";
-import FlipCard from "../companent/flipping/page";
+import FlipCard from "../_components/FlipCard";
 
 const products = [
   {

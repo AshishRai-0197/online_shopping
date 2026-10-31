@@ -1,6 +1,7 @@
 "use client";
 
 import { useState } from "react";
+import { useCart } from "../context/CartContext";
 
 interface Product {
   id: number;
@@ -13,6 +14,15 @@ interface Product {
 export default function FlipCard({ product }: { product: Product }) {
   const [flipped, setFlipped] = useState(false);
   const [payment, setPayment] = useState("");
+  const [added, setAdded] = useState(false);
+  const { addItem } = useCart();
+
+  const addToCart = (event: React.MouseEvent) => {
+    event.stopPropagation(); // keep the card flipped
+    addItem(product);
+    setAdded(true);
+    setTimeout(() => setAdded(false), 1500);
+  };
 
   const paymentNow = async () => {
     setPayment("Processing Payment...");
@@ -50,10 +60,19 @@ export default function FlipCard({ product }: { product: Product }) {
           <h3 className="text-xl font-bold">{product.name}</h3>
           <p className="text-lg font-bold mt-1">${product.price}</p>
           <p className="text-sm opacity-80">{product.brand}</p>
-          <div className="mt-8 flex flex-col">
+          <div className="mt-6 flex flex-col gap-2">
             <button
-              onClick={() => paymentNow()}
-              className="py-3 px-12 bg-green-500 border flex items-center gap-2 rounded-lg shadow-lg hover:shadow-lg cursor-pointer"
+              onClick={addToCart}
+              className="py-2 px-12 bg-white text-blue-700 font-medium rounded-lg shadow hover:bg-blue-50 cursor-pointer"
+            >
+              {added ? "Added ✓" : "Add to Cart"}
+            </button>
+            <button
+              onClick={(event) => {
+                event.stopPropagation();
+                paymentNow();
+              }}
+              className="py-2 px-12 bg-green-500 border flex items-center gap-2 rounded-lg shadow-lg hover:shadow-lg cursor-pointer"
             >
               Buy Now
               <svg
