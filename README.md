@@ -1,36 +1,77 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# 🛒 Online Shopping
 
-## Getting Started
+A full-stack online store built with **Next.js** and **PostgreSQL**. Users can sign up, log in, browse products by category and go through a mock checkout.
 
-First, run the development server:
+## ✨ Features
+
+- 🔐 **Sign up & login**: passwords hashed with bcrypt, sessions with JWT
+- 🛍️ **Product catalog**: categories like clothing, electronics, furniture and home & living
+- 🎠 **Animated UI**: carousels with Swiper, animations with Framer Motion
+- 💳 **Mock payment**: test checkout flow (no real money)
+- 📧 **Email**: welcome email on sign-up with Nodemailer
+- 💬 **Contact & feedback** pages
+
+## 🛠 Built with
+
+| Part | Tech |
+| --- | --- |
+| Frontend | Next.js 16, React 19, TypeScript, Tailwind CSS |
+| Backend | Next.js API routes |
+| Database | PostgreSQL + Knex.js (migrations) |
+| Auth | bcryptjs, jsonwebtoken |
+| Other | Nodemailer, Swiper, Framer Motion |
+
+## 🚀 Run it locally
+
+**1. Clone and install**
 
 ```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+git clone https://github.com/AshishRai-0197/online_shopping.git
+cd online_shopping
+npm install
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+**2. Create a `.env` file**
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+```env
+PG_USER=your_db_user
+PG_PASSWORD=your_db_password
+PG_DATABASE=online_shopping
+JWT_SECRET=a_long_random_secret
+EMAIL_HOST=smtp.example.com
+EMAIL_PORT=587
+EMAIL_USER=you@example.com
+EMAIL_PASS=your_email_password
+```
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+> The database runs on `localhost:5433` (set in `knexfile.js`).
 
-## Learn More
+**3. Create the tables and start the app**
 
-To learn more about Next.js, take a look at the following resources:
+```bash
+npx knex migrate:latest
+npm run dev
+```
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+Then open [http://localhost:3000](http://localhost:3000).
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+## 🗄️ Database tables
 
-## Deploy on Vercel
+- **users**: name, email, hashed password
+- **products**: name, price, description, brand
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+## 📁 Project structure
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+```
+app/
+  api/          # signup, login, email, fake_payment
+  products/     # product listing
+  signup/       # sign-up page
+  contact/      # contact page
+  feedback/     # feedback page
+migrations/     # database tables
+```
+
+## 👤 Author
+
+**Ashish Rai**: [LinkedIn](https://www.linkedin.com/in/ashish-rai-776022383/) · [GitHub](https://github.com/AshishRai-0197)
