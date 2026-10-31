@@ -4,9 +4,14 @@ import bcrypt from "bcryptjs";
 import jwt from "jsonwebtoken";
 import { sendMail } from "@/email/route";
 const kn = knex(knexConfig.development);
-const JWT_SECRET = process.env.JWT_SECRET || "fallback_secret_key";
 
 export async function POST(req: Request) {
+  const JWT_SECRET = process.env.JWT_SECRET;
+  if (!JWT_SECRET) {
+    console.error("JWT_SECRET is not set. Add it to your .env file.");
+    return Response.json({ error: "Server is not configured" }, { status: 500 });
+  }
+
   try {
     const { email, password } = await req.json();
 
