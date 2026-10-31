@@ -6,8 +6,9 @@ A full-stack online store built with **Next.js** and **PostgreSQL**. Users can s
 
 - 🔐 **Sign up & login**: passwords hashed with bcrypt, sessions with JWT
 - 🛍️ **Product catalog**: categories like clothing, electronics, furniture and home & living
+- 🛒 **Shopping cart**: add items, change quantity, remove, see subtotal, shipping and total (saved in the browser)
 - 🎠 **Animated UI**: carousels with Swiper, animations with Framer Motion
-- 💳 **Mock payment**: test checkout flow (no real money)
+- 💳 **Mock checkout**: pay for the whole cart with a test payment (no real money)
 - 📧 **Email**: welcome email on sign-up with Nodemailer
 - 💬 **Contact & feedback** pages
 
@@ -66,6 +67,9 @@ Then open [http://localhost:3000](http://localhost:3000).
 app/
   api/          # signup, login, email, fake_payment
   products/     # product listing
+  cart/         # shopping cart page
+  context/      # CartContext (cart state, saved to localStorage)
+  _components/  # Header, Footer, FlipCard
   signup/       # sign-up page
   contact/      # contact page
   feedback/     # feedback page
